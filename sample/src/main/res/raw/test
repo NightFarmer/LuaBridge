@@ -1,0 +1,11 @@
+
+function functionInLuaFile(key)
+    return ' Function in Lua file . Return : '..key..'!'
+end
+
+function callAndroidApi(context,layout,tip)
+    tv = luajava.newInstance("android.widget.TextView",context)
+    tv:setText(tip)
+    layout:addView(tv)
+end
+
