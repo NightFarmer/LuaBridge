@@ -1,15 +1,46 @@
 
 function functionInLuaFile(key)
-    return ' Function in Lua file . Return : '..key..'!'
+    return ' lua file . Return : '..key..'!'
 end
 
-function callAndroidApi(context,layout,tip)
+function callAndroidApi(context,layout,tip,color)
     tv = luajava.newInstance("android.widget.TextView",context)
-    tv:setText(tip.."中午呵呵呵")
-    tv:setTextColor(4294901760)
+    tv:setText(tip.."..追加中文")
     layout:addView(tv)
-    io.write("test\n")
+    tv:setTextColor(-16711936)--负数的负数，也就是说二进制取反+1再加上负号
+    return tv
 end
+
+function textString(inNum,tv,context)
+    tv:setTextColor(-16711936)--(颜色十六进制如0xff00ff)负数的负数，也就是说二进制取反+1再加上负号
+    return inNum
+end
+
+
+function startTestActivity(context)
+    intent = luajava.newInstance("android.content.Intent")
+    componentName = luajava.newInstance("android.content.ComponentName","com.nightfarmer.luabridge.sample","com.nightfarmer.luabridge.sample.TestActivity")
+    intent:setFlags(intent.FLAG_ACTIVITY_NEW_TASK)
+    intent:setComponent(componentName)
+    context:startActivity(intent)
+end
+
+
+function addListener(activity)
+    local id = luajava.bindClass("com.nightfarmer.luabridge.sample.R$id")
+    local launchBt = activity:findViewById(id.myLaunchButton)
+
+    buttonProxy = luajava.createProxy("android.view.View$OnClickListener", button_cb)
+    launchBt:setOnClickListener(buttonProxy)
+end
+
+button_cb = {}
+function button_cb.onClick(ev)
+    print("hello")
+    startTestActivity(ev:getContext())
+end
+
+
 
 function test()
     if true then

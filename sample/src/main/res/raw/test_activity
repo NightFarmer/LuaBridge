@@ -1,0 +1,86 @@
+function onCreate(activity)
+    -- TODO 初始化
+    activity:setTitle("这个界面完全由Lua编写")
+    initUI(activity)
+    addListener(activity)
+end
+
+function onResume(activity)
+    -- TODO
+end
+
+function onActivityResult(activity, requestCode, resultCode, data)
+    -- TODO
+end
+
+function initUI(activity)
+    local id = luajava.bindClass("com.nightfarmer.luabridge.sample.R$id")
+    local layout = activity:findViewById(id.layout)
+
+    button2 = luajava.newInstance("android.widget.Button", activity)
+    button2:setText("Lua初始化的button")
+    layout:addView(button2)
+
+    local button3 = luajava.newInstance("android.widget.Button", activity)
+    button3:setText("Lua创建动画")
+    layout:addView(button3)
+    local button3Listener = luajava.createProxy("android.view.View$OnClickListener", button3_cb)
+    button3:setOnClickListener(button3Listener)
+
+    button4 = luajava.newInstance("android.widget.Button", activity)
+    button4:setText("Lua创建线程")
+    layout:addView(button4)
+    local button4Listener = luajava.createProxy("android.view.View$OnClickListener", button4_cb)
+    button4:setOnClickListener(button4Listener)
+
+end
+
+button4_cb={}
+function button4_cb.onClick(eventView)
+    local looper = luajava.bindClass("android.os.Looper")
+    handler = luajava.newInstance("android.os.Handler", looper:getMainLooper())
+    a = 1
+    local thread_cb={run=function()
+        --while(a<3) do
+            local main_cb = {run=function()
+                button4:setText("sss"..a)
+                a=a+1
+            end
+            }
+            local main_run = luajava.createProxy("java.lang.Runnable", main_cb)
+            handler:post(main_run)
+            --handler:postDelayed(main_run,1000)
+            --local Thread = luajava.bindClass("java.lang.Thread")
+            --Thread:sleep(1000)
+        --end
+    end
+    }
+    local runnable = luajava.createProxy("java.lang.Runnable", thread_cb)
+    local thread = luajava.newInstance("java.lang.Thread", runnable)
+    thread:start()
+end
+
+
+button3_cb={}
+function button3_cb.onClick(eventView)
+    local Toast = luajava.bindClass("android.widget.Toast");
+    Toast:makeText(eventView:getContext(),"按钮被点击，通过lua发起toast",0):show()
+
+    ObjectAnimator = luajava.bindClass("com.nightfarmer.luabridge.sample.ObjectAnimator")
+    local animator = ObjectAnimator:ofFloat(button2, "rotation",0,360)
+    animator:setDuration(1000)
+    animator:start()
+end
+
+function addListener(activity)
+    local id = luajava.bindClass("com.nightfarmer.luabridge.sample.R$id")
+    local launchBt = activity:findViewById(id.myLaunchButton)
+    local buttonProxy = luajava.createProxy("android.view.View$OnClickListener", button_cb)
+    launchBt:setOnClickListener(buttonProxy)
+end
+
+button_cb = {}
+function button_cb.onClick(eventView)
+    local Toast = luajava.bindClass("android.widget.Toast");
+    Toast:makeText(eventView:getContext(),"按钮被点击，通过lua发起toast",0):show()
+end

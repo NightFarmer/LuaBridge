@@ -12,18 +12,38 @@
     tools:context="com.nightfarmer.luabridge.sample.MainActivity">
 
     <Button
+        android:text="执行lua代码"
         android:onClick="runStatement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <Button
+        android:text="调用lua文件返回数据"
         android:onClick="runFile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <Button
+        android:text="调用lua文件生成TextView"
         android:onClick="callAndroidAPI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <Button
+        android:text="测试参数和返回值类型"
+        android:onClick="textString"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="启动activity"
+        android:onClick="startTestActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/myLaunchButton"
+        android:text="获取viewId并监听点击"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <TextView
 
         android:layout_width="wrap_content"
