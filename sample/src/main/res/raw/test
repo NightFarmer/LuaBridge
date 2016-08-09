@@ -5,7 +5,21 @@ end
 
 function callAndroidApi(context,layout,tip)
     tv = luajava.newInstance("android.widget.TextView",context)
-    tv:setText(tip)
+    tv:setText(tip.."中午呵呵呵")
+    tv:setTextColor(4294901760)
     layout:addView(tv)
+    io.write("test\n")
 end
 
+function test()
+    if true then
+        io.write("test\n")
+    end
+end
+
+
+for i=1,10 do
+    io.write("test"..i.."\n")
+end
+
+io.stdout:flush()

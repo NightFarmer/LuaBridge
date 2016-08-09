@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 bo.write(i);
                 i = isr.read();
             }
-            return bo.toString();
+            return bo.toString("utf-8");
         } catch (IOException e) {
             Log.e("ReadStream", "读取文件流失败");
             return "";
