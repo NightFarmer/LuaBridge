@@ -36,7 +36,7 @@ function button1_cb.onClick(view)
 	local path = view:getContext():getFilesDir()
 	local file = luajava.newInstance("java.io.File", path, "hehehe")
 
-	HttpCall:downLoad("https://github.com/NightFarmer/LuaBridge/raw/master/sample/src/main/res/raw/NetLuaActivity.lua", file, downLoadCallBack)
+	HttpCall:downLoad("https://github.com/NightFarmer/LuaBridge/raw/master/sample/src/main/assets/NetLuaActivity.lua", file, downLoadCallBack)
 
 end
 

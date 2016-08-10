@@ -31,7 +31,7 @@ public class NetLuaActivity extends AppCompatActivity {
         File file = new File(sdPath, "NetLuaActivity.lua");
         file.delete();
         if (!file.exists()) {
-            HttpCall.downLoad("https://github.com/NightFarmer/LuaBridge/raw/master/sample/src/main/res/raw/NetLuaActivity.lua", file, new SampleNetLuaCallback() {
+            HttpCall.downLoad("https://github.com/NightFarmer/LuaBridge/raw/master/sample/src/main/assets/NetLuaActivity.lua", file, new SampleNetLuaCallback() {
 //            HttpCall.downLoad("http://www.97gyl.com/download/NetLuaActivity.lua", file, new SampleNetLuaCallback() {
                 @Override
                 public void onSuccess(File file) {
