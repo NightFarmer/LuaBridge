@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.nightfarmer.luabridge.sample.recyclerview.RecyclerViewActivity;
+
 import org.keplerproject.luajava.LuaException;
 import org.keplerproject.luajava.LuaState;
 import org.keplerproject.luajava.LuaStateFactory;
@@ -155,6 +157,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void getLuaByNet(View v) {
         startActivity(new Intent(this, NetLuaActivity.class));
+    }
+
+
+    public void testRecyclerView(View v) {
+        startActivity(new Intent(this, RecyclerViewActivity.class));
     }
 
 
