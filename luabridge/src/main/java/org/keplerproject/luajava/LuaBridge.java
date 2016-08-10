@@ -6,6 +6,9 @@ import android.support.annotation.RawRes;
 import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 /**
@@ -16,6 +19,15 @@ public class LuaBridge {
 
     public static String loadRaw(Context context, @RawRes int res) {
         return readStream(context.getResources().openRawResource(res));
+    }
+
+    public static String loadFile(Context context, File file) {
+        try {
+            return readStream(new FileInputStream(file));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private static String readStream(InputStream is) {

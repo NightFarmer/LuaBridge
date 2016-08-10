@@ -1,12 +1,15 @@
 package com.nightfarmer.luabridge.sample;
 
 import android.content.ComponentName;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.keplerproject.luajava.LuaException;
@@ -101,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
     TextView tv;
 
     public void textString(View v) {
-        if(tv==null)return;
+        if (tv == null) return;
         String str = readStream(getResources().openRawResource(R.raw.test));
         mLuaState.LdoString(str);
         // 找到functionInLuaFile函数
@@ -129,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
 //        Log.i("xx", "" + mLuaState.toNumber(-1));
     }
 
-    public void startTestActivity(View v){
+    public void startTestActivity(View v) {
         String str = readStream(getResources().openRawResource(R.raw.test));
         mLuaState.LdoString(str);
         // 找到functionInLuaFile函数
@@ -139,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void addListener(){
+    public void addListener() {
         String str = readStream(getResources().openRawResource(R.raw.test));
         mLuaState.LdoString(str);
         // 找到functionInLuaFile函数
@@ -147,6 +150,11 @@ public class MainActivity extends AppCompatActivity {
         mLuaState.pushJavaObject(this);
         mLuaState.call(1, 0);
 
+
+    }
+
+    public void getLuaByNet(View v) {
+        startActivity(new Intent(this, NetLuaActivity.class));
     }
 
 
